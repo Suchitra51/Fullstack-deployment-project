@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Full Stack App</title>
+</head>
+<body>
+
+<h2>Form</h2>
+
+<input id="name" placeholder="Name" />
+<input id="email" placeholder="Email" />
+<button onclick="submitForm()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+async function submitForm() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    const res = await fetch("http://localhost:5000/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email })
+    });
+
+    const data = await res.json();
+    document.getElementById("result").innerText = data.message;
+}
+</script>
+
+</body>
+</html>
